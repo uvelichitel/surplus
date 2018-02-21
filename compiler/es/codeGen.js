@@ -219,13 +219,13 @@ var codeGen = function (ctl, opts) {
         return new DOMExpression(ids, statements, computations);
     }, emitDOMExpression = function (code, indent) {
         var nl = indent.nl, nli = indent.nli, nlii = indent.nlii;
-        return '(function () {' + nli
+        return 'function () {' + nli
             + 'var ' + code.ids.join(', ') + ';' + nli
             + code.statements.join(nli) + nli
             + code.computations.map(function (comp) { return emitComputation(comp, indent); })
                 .join(nli) + (code.computations.length === 0 ? '' : nli)
             + 'return __;' + nl
-            + '})()';
+            + '}';
     }, emitComputation = function (comp, _a) {
         var nli = _a.nli, nlii = _a.nlii;
         var statements = comp.statements, loc = comp.loc, stateVar = comp.stateVar, seed = comp.seed;

@@ -293,13 +293,13 @@ const codeGen = (ctl : Program, opts : Params) => {
         },
         emitDOMExpression = (code : DOMExpression, indent : Indents) => {
             const { nl, nli, nlii } = indent;
-            return '(function () {' + nli
+            return 'function () {' + nli
                 + 'var ' + code.ids.join(', ') + ';' + nli
                 + code.statements.join(nli) + nli
                 + code.computations.map(comp => emitComputation(comp, indent))
                     .join(nli) + (code.computations.length === 0 ? '' : nli)
                 + 'return __;' + nl
-                +  '})()';
+                +  '}';
         },
         emitComputation = (comp : Computation, { nli, nlii } : Indents) => {
             const { statements, loc, stateVar, seed } = comp;
